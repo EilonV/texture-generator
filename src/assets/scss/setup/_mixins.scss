@@ -1,0 +1,39 @@
+@use 'sass:list';
+
+@mixin for-mobile-layout {
+    @media (max-width: $mobile-breakpoint) {
+        @content;
+    }
+}
+
+@mixin for-tablet-layout {
+    @media (max-width: $tablet-breakpoint) {
+        @content;
+    }
+}
+
+@mixin for-wide-layout {
+    @media (min-width: $desktop-breakpoint) {
+        @content;
+    }
+}
+
+@mixin for-wider-layout {
+    @media (min-width: $wide-dekstop-breakpoint) {
+        @content;
+    }
+}
+
+@mixin layoutGTC($max) {
+    grid-template-columns:
+        minmax($layoutPadding, 1fr) minmax(auto, $max) minmax($layoutPadding, 1fr);
+}
+
+@mixin random-bg() {
+    background: rgb(random(255), random(255), random(255));
+}
+
+@mixin random-color-list() {
+    background: list.nth($list, random(list.length($list)));
+    // content: random($limit: 600);
+}

@@ -1,0 +1,33 @@
+@keyframes drop {
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in-cake {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(0.6);
+    }
+}
+
+@keyframes fade-in-side {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-in-side-guest {
+    to {
+        opacity: 1;
+        transform: translateX(-100px);
+    }
+}
