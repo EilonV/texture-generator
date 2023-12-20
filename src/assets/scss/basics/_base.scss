@@ -6,17 +6,17 @@ html {
     transition: 0.2s;
     // font-family: Rubik;
     height: 100vh;
+    background-color: $white;
+    color: $black;
+    font-family: Nunito-Bold;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: burlywood;
     height: 100%;
     width: 100%;
     position: relative;
-
-    ::selection {}
 }
 
 a {

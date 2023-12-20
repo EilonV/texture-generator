@@ -12,6 +12,8 @@
 @import 'setup/_fonts';
 
 // CMPS
+@import 'components/_desc.scss';
+@import 'components/_generator.scss';
 
 // VIEWS
 @import 'views/_home.scss';
