@@ -1,14 +1,67 @@
 .generator {
     width: 100%;
+    display: flex;
 
     .texture-wrapper {
-        background-image: url("https://texturegenerator.sirv.com/Images/wall.jpg");
         width: 100%;
         max-height: 400px;
         max-width: 400px;
         aspect-ratio: 1/1;
-        background-position: 100% 100%;
-        // background-size: 200% 200%;
-        opacity: 0.25;
+
+        .texture {
+            background-image: url("https://texturegenerator.sirv.com/Images/paper.jpg");
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .code-export {
+        background-color: $black;
+        padding: $padding;
+
+        p {
+            color: $pink;
+            font-family: Consolas;
+            font-weight: 700;
+            font-size: $code;
+            span{
+                color: lightblue;
+            }
+        }
+    }
+
+    input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: transparent;
+
+        &::-webkit-slider-runnable-track {
+            background-color: $blue;
+            height: 10px;
+            border-radius: 20px;
+        }
+
+        &::-moz-range-track {
+            background-color: $blue;
+            height: 10px;
+        }
+
+        &::-webkit-slider-thumb {
+            appearance: none;
+            background-color: $pink;
+            height: 10px;
+            width: 10px;
+            border-radius: 50px;
+            outline: 3px $black solid;
+        }
+
+        &::-moz-range-thumb {
+            appearance: none;
+            background-color: $pink;
+            height: 10px;
+            width: 10px;
+            border-radius: 50px;
+            outline: 3px $black solid;
+        }
     }
 }

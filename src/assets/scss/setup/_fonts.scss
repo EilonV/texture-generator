@@ -1,1 +1,6 @@
-@import '/src/assets/fonts/nunito/css/nunito.css'
+@import '/src/assets/fonts/nunito/css/nunito.css';
+
+@font-face {
+    font-family: Consolas;
+    src: url('../../fonts/Consolas/CONSOLA.TTF');
+}

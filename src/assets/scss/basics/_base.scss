@@ -17,8 +17,9 @@ body {
     height: 100%;
     width: 100%;
     position: relative;
-    background-image: url("https://texturegenerator.sirv.com/Images/wall.jpg");
     object-fit: cover;
+    background-color: transparent;
+    background-image: url("https://texturegenerator.sirv.com/Images/paper.jpg");
 }
 
 a {
@@ -27,6 +28,10 @@ a {
     &:visited {
         color: inherit;
     }
+}
+
+p,label {
+    font-size: $p;
 }
 
 p,

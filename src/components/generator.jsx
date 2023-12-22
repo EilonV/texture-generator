@@ -4,20 +4,22 @@ import { HexColorInput, RgbaColorPicker } from "react-colorful";
 export const Generator = () => {
 
     useEffect(() => {
-        const body = document.querySelector('body')
-        body.style.backgroundColor = texture.bgColor
-        body.style.opacity =  `${texture.opacity / 100}`
-        body.style.backgroundPosition = `${texture.bgPosX}% ${texture.bgPosY}%`
-        body.style.backgroundSize = `${texture.bgSizeX}% ${texture.bgSizeY}%`
+        const body = document.body
+        // body.backgroundColor = texture.bgColor
+        // body.opacity = `${texture.opacity / 100}`
+        // body.backgroundPosition = `${texture.bgPosX}% ${texture.bgPosY}%`
+        // body.backgroundSize = `${texture.bgSizeX}% ${texture.bgSizeY}%`
+        body.classList.add('active')
+
     })
 
     const [color, setColor] = useState({ r: 250, g: 250, b: 255, a: 1 })
     const [texture, setTexture] = useState({
         opacity: 25,
         baseLink: "https://texturegenerator.sirv.com/Images/wall.jpg",
-        bgColor: color,
-        bgPosX: 100,
-        bgPosY: 100,
+        bgColor: "rgba(250,250,255,1)",
+        bgPosX: 0,
+        bgPosY: 0,
         bgSizeX: 100,
         bgSizeY: 100
     })
@@ -38,12 +40,18 @@ export const Generator = () => {
         }))
     }
 
+
     return <section className="generator flex space-evenly">
         <div className="texture-wrapper" style={{
-            opacity: `${texture.opacity / 100}`,
-            backgroundPosition: `${texture.bgPosX}% ${texture.bgPosY}%`,
-            backgroundSize: `${texture.bgSizeX}% ${texture.bgSizeY}%`,
+            backgroundColor: `${texture.bgColor}`
         }}>
+            <div className="texture flex align-center  justify-center" style={{
+                opacity: `${texture.opacity / 100}`,
+                backgroundPosition: `${texture.bgPosX}% ${texture.bgPosY}%`,
+                backgroundSize: `${texture.bgSizeX}% ${texture.bgSizeY}%`,
+            }}>
+
+            </div>
         </div>
 
         <div>
@@ -51,15 +59,15 @@ export const Generator = () => {
                 <form className="flex column" onInput={handleForm}>
                     <div className="flex align-center">
                         <label htmlFor="opacity">Opacity</label>
-                        <input type="range" name="opacity" id="opacity" />
+                        <input type="range" name="opacity" id="opacity" defaultValue={texture.opacity} />
                     </div>
                     <div className="flex align-center">
                         <label htmlFor="bgPosX">Background pos X</label>
-                        <input type="range" name="bgPosX" id="bgPosX" step={1} min={100} max={200} />
+                        <input type="range" name="bgPosX" id="bgPosX" defaultValue={texture.bgPosX} step={1} min={-100} max={100} />
                     </div>
                     <div className="flex align-center">
                         <label htmlFor="bgPosY">Background pos Y</label>
-                        <input type="range" name="bgPosY" id="bgPosY" step={1} min={100} max={200} />
+                        <input type="range" name="bgPosY" id="bgPosY" defaultValue={texture.bgPosY} step={1} min={-100} max={100} />
                     </div>
                     <div className="flex align-center">
                         <label htmlFor="bgSizeX">Background size X</label>
@@ -75,10 +83,13 @@ export const Generator = () => {
 
             </div>
 
-            {/* <div className="code-export">
-
-            </div> */}
+            <div className="code-export">
+                <p><span>background-image:</span> url("{texture.baseLink}?opacity={texture.opacity}");</p>
+                <p><span>background-position:</span> {texture.bgPosX}% {texture.bgPosY}%;</p>
+                <p><span>background-size:</span> {texture.bgSizeX}% {texture.bgSizeY}%;</p>
+                <p><span>background-color:</span> "{texture.bgColor}";</p>
+            </div>
 
         </div>
-    </section>
+    </section >
 }
