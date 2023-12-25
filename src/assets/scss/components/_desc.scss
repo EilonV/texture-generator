@@ -1,8 +1,24 @@
 .desc {
+    background-color: $dark-blue;
+    color: $pinker;
+    border-radius: 20px 20px 0 0;
+    padding: 30px 30px 50px;
+    transform: translateY(20px);
+    z-index: 0;
+    gap: 10px;
+    background-image: url("https://texturegenerator.sirv.com/Images/jeans.jpg?opacity=8");
+    background-size: 100% 100%;
+
     h1 {
         font-size: 4rem;
+        line-height: 100%;
+        width: 100%;
     }
-    h2{
+
+    h2 {
         font-size: 2rem;
+        line-height: 100%;
+        color: $pinker2;
+        width: 100%;
     }
 }

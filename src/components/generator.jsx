@@ -57,23 +57,23 @@ export const Generator = ({ bgRef, bgColorRef }) => {
         <div className="setttings-export flex column">
             <div className="settings flex space-between align-center">
                 <form className="flex column" onInput={handleForm}>
-                    <div className="flex align-center">
+                    <div className="slider flex align-center">
                         <label htmlFor="opacity">Opacity</label>
                         <input type="range" name="opacity" id="opacity" defaultValue={texture.opacity} />
                     </div>
-                    <div className="flex align-center">
+                    <div className="slider flex align-center">
                         <label htmlFor="bgPosX">Background pos X</label>
                         <input type="range" name="bgPosX" id="bgPosX" defaultValue={texture.bgPosX} step={1} min={-100} max={100} />
                     </div>
-                    <div className="flex align-center">
+                    <div className="slider flex align-center">
                         <label htmlFor="bgPosY">Background pos Y</label>
                         <input type="range" name="bgPosY" id="bgPosY" defaultValue={texture.bgPosY} step={1} min={-100} max={100} />
                     </div>
-                    <div className="flex align-center">
+                    <div className="slider flex align-center">
                         <label htmlFor="bgSizeX">Background size X</label>
                         <input type="range" name="bgSizeX" id="bgSizeX" step={50} min={100} max={2000} />
                     </div>
-                    <div className="flex align-center">
+                    <div className="slider flex align-center">
                         <label htmlFor="bgSizeY">Background size Y</label>
                         <input type="range" name="bgSizeY" id="bgSizeY" step={50} min={100} max={2000} />
                     </div>
