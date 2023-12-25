@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { HexColorInput, RgbaColorPicker } from "react-colorful";
 
-export const Generator = () => {
-
+export const Generator = ({ bgRef, bgColorRef }) => {
     useEffect(() => {
+        const bg = bgRef.current.style
+        const bgColor = bgColorRef.current.style
         const body = document.body
-        // body.backgroundColor = texture.bgColor
-        // body.opacity = `${texture.opacity / 100}`
-        // body.backgroundPosition = `${texture.bgPosX}% ${texture.bgPosY}%`
-        // body.backgroundSize = `${texture.bgSizeX}% ${texture.bgSizeY}%`
+        bg.opacity = `${texture.opacity / 100}`
+        bg.backgroundPosition = `${texture.bgPosX}% ${texture.bgPosY}%`
+        bg.backgroundSize = `${texture.bgSizeX}% ${texture.bgSizeY}%`
+        bgColor.backgroundColor = texture.bgColor
         body.classList.add('active')
-
     })
 
     const [color, setColor] = useState({ r: 250, g: 250, b: 255, a: 1 })
@@ -41,7 +41,7 @@ export const Generator = () => {
     }
 
 
-    return <section className="generator flex space-evenly">
+    return <section className="generator flex space-evenly align-center">
         <div className="texture-wrapper" style={{
             backgroundColor: `${texture.bgColor}`
         }}>
@@ -54,8 +54,8 @@ export const Generator = () => {
             </div>
         </div>
 
-        <div>
-            <div className="settings">
+        <div className="setttings-export flex column">
+            <div className="settings flex space-between align-center">
                 <form className="flex column" onInput={handleForm}>
                     <div className="flex align-center">
                         <label htmlFor="opacity">Opacity</label>
@@ -87,7 +87,7 @@ export const Generator = () => {
                 <p><span>background-image:</span> url("{texture.baseLink}?opacity={texture.opacity}");</p>
                 <p><span>background-position:</span> {texture.bgPosX}% {texture.bgPosY}%;</p>
                 <p><span>background-size:</span> {texture.bgSizeX}% {texture.bgSizeY}%;</p>
-                <p><span>background-color:</span> "{texture.bgColor}";</p>
+                <p><span>background-color:</span> {texture.bgColor};</p>
             </div>
 
         </div>

@@ -1,13 +1,18 @@
 .generator {
     width: 100%;
     display: flex;
+    background-color: $white;
+    padding: $padding;
+    gap: 10px;
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
     .texture-wrapper {
         width: 100%;
         max-height: 400px;
         max-width: 400px;
         aspect-ratio: 1/1;
-
+        
         .texture {
             background-image: url("https://texturegenerator.sirv.com/Images/paper.jpg");
             height: 100%;
@@ -15,16 +20,29 @@
         }
     }
 
+    .setttings-export {
+        gap: 20px;
+        height: 100%;
+    }
+
+    .settings {
+        height: 100%;
+        gap: 10px;
+    }
+
+
     .code-export {
         background-color: $black;
         padding: $padding;
+        box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
 
         p {
             color: $pink;
             font-family: Consolas;
             font-weight: 700;
             font-size: $code;
-            span{
+
+            span {
                 color: lightblue;
             }
         }
