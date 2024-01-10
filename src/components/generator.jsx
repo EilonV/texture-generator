@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { HexColorInput, RgbaColorPicker } from "react-colorful";
+import { Textures } from "./textures";
 
 export const Generator = ({ bgRef, bgColorRef }) => {
     useEffect(() => {
@@ -13,16 +14,21 @@ export const Generator = ({ bgRef, bgColorRef }) => {
         body.classList.add('active')
     })
 
+    // let img = 'wall'
+
+    const [img, setImg] = useState('wall')
+    let baseLink = `https://texturegenerator.sirv.com/Images/${img}.jpg`
     const [color, setColor] = useState({ r: 250, g: 250, b: 255, a: 1 })
     const [texture, setTexture] = useState({
         opacity: 25,
-        baseLink: "https://texturegenerator.sirv.com/Images/wall.jpg",
+        link: baseLink,
         bgColor: "rgba(250,250,255,1)",
         bgPosX: 0,
         bgPosY: 0,
         bgSizeX: 100,
         bgSizeY: 100
     })
+
 
     const handleForm = (e) => {
         changeTextureValues(e.target.name, e.target.value)
@@ -39,7 +45,6 @@ export const Generator = ({ bgRef, bgColorRef }) => {
             [key]: value
         }))
     }
-
 
     return <section className="generator flex space-evenly align-center">
         <div className="texture-wrapper" style={{
@@ -71,20 +76,19 @@ export const Generator = ({ bgRef, bgColorRef }) => {
                     </div>
                     <div className="slider flex align-center">
                         <label htmlFor="bgSizeX">Background size X</label>
-                        <input type="range" name="bgSizeX" id="bgSizeX" step={50} min={100} max={2000} />
+                        <input type="range" name="bgSizeX" id="bgSizeX" step={1} min={100} max={2000} />
                     </div>
                     <div className="slider flex align-center">
                         <label htmlFor="bgSizeY">Background size Y</label>
-                        <input type="range" name="bgSizeY" id="bgSizeY" step={50} min={100} max={2000} />
+                        <input type="range" name="bgSizeY" id="bgSizeY" step={1} min={100} max={2000} />
                     </div>
                 </form>
 
                 <RgbaColorPicker color={color} onChange={handleColor} />
-
             </div>
 
             <div className="code-export">
-                <p><span>background-image:</span> url("{texture.baseLink}?opacity={texture.opacity}");</p>
+                <p><span>background-image:</span> url("{texture.link}{texture.opacity > 0 && `?opacity=${texture.opacity}`}");</p>
                 <p><span>background-position:</span> {texture.bgPosX}% {texture.bgPosY}%;</p>
                 <p><span>background-size:</span> {texture.bgSizeX}% {texture.bgSizeY}%;</p>
                 <p><span>background-color:</span> {texture.bgColor};</p>

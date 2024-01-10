@@ -1,6 +1,6 @@
 .desc {
     background-color: $dark-blue;
-    color: $pinker;
+    color: $brown;
     border-radius: 20px 20px 0 0;
     padding: 30px 30px 50px;
     transform: translateY(20px);
@@ -18,7 +18,11 @@
     h2 {
         font-size: 2rem;
         line-height: 100%;
-        color: $pinker2;
+        color: $browner;
         width: 100%;
+    }
+
+    h3 {
+        color: $browner;
     }
 }
