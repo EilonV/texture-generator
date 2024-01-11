@@ -10,14 +10,15 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
         bg.opacity = `${texture.opacity / 100}`
         bg.backgroundPosition = `${texture.bgPosX}% ${texture.bgPosY}%`
         bg.backgroundSize = `${texture.bgSizeX}% ${texture.bgSizeY}%`
+        bg.filter = `grayscale(${texture.grayscale})`
         bgColor.backgroundColor = texture.bgColor
         body.classList.add('active')
     })
-
+    let baseLink
     if (img === 'woodpng')
-        var baseLink = `https://texturegenerator.sirv.com/Images/${img}.png`
-    else{
-        var baseLink = `https://texturegenerator.sirv.com/Images/${img}.jpg`
+        baseLink = `https://texturegenerator.sirv.com/Images/${img}.png`
+    else {
+        baseLink = `https://texturegenerator.sirv.com/Images/${img}.jpg`
     }
     const [color] = useState({ r: 250, g: 250, b: 255, a: 1 })
     const [texture, setTexture] = useState({
@@ -27,12 +28,15 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
         bgPosX: 0,
         bgPosY: 0,
         bgSizeX: 100,
-        bgSizeY: 100
+        bgSizeY: 100,
+        grayscale: 0
     })
 
 
     const handleForm = (e) => {
-        changeTextureValues(e.target.name, e.target.value)
+        if (e.target.type === 'checkbox')
+            changeTextureValues(e.target.name, e.target.checked)
+        else changeTextureValues(e.target.name, e.target.value)
     }
 
     const handleColor = (value) => {
@@ -41,7 +45,11 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
     }
 
     const changeTextureValues = (key, value) => {
-        setTexture((prevTexture) => ({
+        if (key === 'grayscale') setTexture((prevTexture) => ({
+            ...prevTexture,
+            [key]: +value
+        }))
+        else setTexture((prevTexture) => ({
             ...prevTexture,
             [key]: value
         }))
@@ -52,6 +60,7 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
             backgroundColor: `${texture.bgColor}`
         }}>
             <div className="texture flex align-center  justify-center" style={{
+                filter: `grayscale(${texture.grayscale})`,
                 backgroundImage: `url(${baseLink})`,
                 opacity: `${texture.opacity / 100}`,
                 backgroundPosition: `${texture.bgPosX}% ${texture.bgPosY}%`,
@@ -84,13 +93,17 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
                         <label htmlFor="bgSizeY">Background size Y</label>
                         <input type="range" name="bgSizeY" id="bgSizeY" step={1} min={100} max={2000} />
                     </div>
+                    <div className="checkbox flex align-center">
+                        <label htmlFor="grayscale">Grayscale? </label>
+                        <input className="custom-checkbox" type="checkbox" name="grayscale" id="grayscale" />
+                    </div>
                 </form>
 
                 <RgbaColorPicker color={color} onChange={handleColor} />
             </div>
 
             <div className="code-export">
-                <p><span>background-image:</span> url("{baseLink}{texture.opacity > 0 && `?opacity=${texture.opacity}`}");</p>
+                <p><span>background-image:</span> url("{baseLink}{texture.opacity > 0 && `?opacity=${texture.opacity}`}{(texture.grayscale === 1 && texture.opacity > 0) && '&grayscale=true'}{(texture.grayscale === 1 && !texture.opacity) && '?grayscale=true'}");</p>
                 <p><span>background-position:</span> {texture.bgPosX}% {texture.bgPosY}%;</p>
                 <p><span>background-size:</span> {texture.bgSizeX}% {texture.bgSizeY}%;</p>
                 <p><span>background-color:</span> {texture.bgColor};</p>

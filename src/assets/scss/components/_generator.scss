@@ -24,6 +24,7 @@
     .setttings-export {
         gap: 20px;
         height: 100%;
+        width: 100%;
     }
 
     .settings {
@@ -36,13 +37,14 @@
         background-color: $black;
         padding: $padding;
         box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
-
+        
         p {
             color: $purple;
             font-family: Consolas;
             font-weight: 700;
             font-size: $code;
-
+            width: 100%;
+            word-wrap: break-word;
             span {
                 color: lightblue;
             }
@@ -52,6 +54,7 @@
     .slider {
         gap: 5px;
     }
+
     input[type="range"] {
         -webkit-appearance: none;
         appearance: none;
@@ -84,6 +87,12 @@
             width: 10px;
             border-radius: 50px;
             outline: 3px $black solid;
+        }
+    }
+
+    .checkbox {
+        input {
+ 
         }
     }
 }
