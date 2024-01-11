@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { HexColorInput, RgbaColorPicker } from "react-colorful";
-import { Textures } from "./textures";
+import { RgbaColorPicker } from "react-colorful";
 
-export const Generator = ({ bgRef, bgColorRef }) => {
+export const Generator = ({ bgRef, bgColorRef, img }) => {
     useEffect(() => {
         const bg = bgRef.current.style
         const bgColor = bgColorRef.current.style
         const body = document.body
+        bg.backgroundImage = `url(${baseLink})`
         bg.opacity = `${texture.opacity / 100}`
         bg.backgroundPosition = `${texture.bgPosX}% ${texture.bgPosY}%`
         bg.backgroundSize = `${texture.bgSizeX}% ${texture.bgSizeY}%`
@@ -14,11 +14,12 @@ export const Generator = ({ bgRef, bgColorRef }) => {
         body.classList.add('active')
     })
 
-    // let img = 'wall'
-
-    const [img, setImg] = useState('wall')
-    let baseLink = `https://texturegenerator.sirv.com/Images/${img}.jpg`
-    const [color, setColor] = useState({ r: 250, g: 250, b: 255, a: 1 })
+    if (img === 'woodpng')
+        var baseLink = `https://texturegenerator.sirv.com/Images/${img}.png`
+    else{
+        var baseLink = `https://texturegenerator.sirv.com/Images/${img}.jpg`
+    }
+    const [color] = useState({ r: 250, g: 250, b: 255, a: 1 })
     const [texture, setTexture] = useState({
         opacity: 25,
         link: baseLink,
@@ -51,6 +52,7 @@ export const Generator = ({ bgRef, bgColorRef }) => {
             backgroundColor: `${texture.bgColor}`
         }}>
             <div className="texture flex align-center  justify-center" style={{
+                backgroundImage: `url(${baseLink})`,
                 opacity: `${texture.opacity / 100}`,
                 backgroundPosition: `${texture.bgPosX}% ${texture.bgPosY}%`,
                 backgroundSize: `${texture.bgSizeX}% ${texture.bgSizeY}%`,
@@ -88,7 +90,7 @@ export const Generator = ({ bgRef, bgColorRef }) => {
             </div>
 
             <div className="code-export">
-                <p><span>background-image:</span> url("{texture.link}{texture.opacity > 0 && `?opacity=${texture.opacity}`}");</p>
+                <p><span>background-image:</span> url("{baseLink}{texture.opacity > 0 && `?opacity=${texture.opacity}`}");</p>
                 <p><span>background-position:</span> {texture.bgPosX}% {texture.bgPosY}%;</p>
                 <p><span>background-size:</span> {texture.bgSizeX}% {texture.bgSizeY}%;</p>
                 <p><span>background-color:</span> {texture.bgColor};</p>
