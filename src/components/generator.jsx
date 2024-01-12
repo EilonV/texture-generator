@@ -10,7 +10,7 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
         bg.opacity = `${texture.opacity / 100}`
         bg.backgroundPosition = `${texture.bgPosX}% ${texture.bgPosY}%`
         bg.backgroundSize = `${texture.bgSizeX}% ${texture.bgSizeY}%`
-        bg.filter = `grayscale(${texture.grayscale})`
+        bg.filter = `grayscale(${texture.grayscale}) blur(${texture.blur/10}px)`
         bgColor.backgroundColor = texture.bgColor
         body.classList.add('active')
     })
@@ -29,7 +29,8 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
         bgPosY: 0,
         bgSizeX: 100,
         bgSizeY: 100,
-        grayscale: 0
+        grayscale: 0,
+        blur: 0
     })
 
 
@@ -60,7 +61,7 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
             backgroundColor: `${texture.bgColor}`
         }}>
             <div className="texture flex align-center  justify-center" style={{
-                filter: `grayscale(${texture.grayscale})`,
+                filter: `grayscale(${texture.grayscale}) blur(${texture.blur/10}px)`,
                 backgroundImage: `url(${baseLink})`,
                 opacity: `${texture.opacity / 100}`,
                 backgroundPosition: `${texture.bgPosX}% ${texture.bgPosY}%`,
@@ -93,9 +94,13 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
                         <label htmlFor="bgSizeY">Background size Y</label>
                         <input type="range" name="bgSizeY" id="bgSizeY" step={1} min={100} max={2000} />
                     </div>
+                    <div className="slider flex align-center">
+                        <label htmlFor="blur">Blur</label>
+                        <input type="range" name="blur" id="blur" />
+                    </div>
                     <div className="checkbox flex align-center">
-                        <label htmlFor="grayscale">Grayscale? </label>
-                        <input className="custom-checkbox" type="checkbox" name="grayscale" id="grayscale" />
+                        <label htmlFor="grayscale">Grayscale </label>
+                        <input className="check" type="checkbox" name="grayscale" id="grayscale" />
                     </div>
                 </form>
 
@@ -103,7 +108,12 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
             </div>
 
             <div className="code-export">
-                <p><span>background-image:</span> url("{baseLink}{texture.opacity > 0 && `?opacity=${texture.opacity}`}{(texture.grayscale === 1 && texture.opacity > 0) && '&grayscale=true'}{(texture.grayscale === 1 && !texture.opacity) && '?grayscale=true'}");</p>
+                <p><span>background-image:</span>url("{baseLink}
+                    {texture.opacity > 0 && `?opacity=${texture.opacity}`}
+                    {(texture.blur > 0 && texture.opacity > 0) && `&blur=${texture.blur}`}
+                    {(texture.grayscale === 1 && texture.opacity > 0) && '&grayscale=true'}
+                    {(texture.grayscale === 1 && !texture.opacity) && '?grayscale=true'}
+                    ");</p>
                 <p><span>background-position:</span> {texture.bgPosX}% {texture.bgPosY}%;</p>
                 <p><span>background-size:</span> {texture.bgSizeX}% {texture.bgSizeY}%;</p>
                 <p><span>background-color:</span> {texture.bgColor};</p>

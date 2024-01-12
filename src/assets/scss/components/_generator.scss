@@ -3,7 +3,7 @@
     display: flex;
     background-color: $white;
     padding: $padding;
-    gap: 10px;
+    gap: 30px;
     border-radius: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     z-index: 1;
@@ -37,7 +37,7 @@
         background-color: $black;
         padding: $padding;
         box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
-        
+
         p {
             color: $purple;
             font-family: Consolas;
@@ -45,6 +45,7 @@
             font-size: $code;
             width: 100%;
             word-wrap: break-word;
+
             span {
                 color: lightblue;
             }
@@ -90,9 +91,63 @@
         }
     }
 
-    .checkbox {
-        input {
- 
+
+    .checkbox{
+        gap: 10px;
+    }
+    .check {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        border-radius: 2px;
+        appearance: none;
+        background-color: #bbb;
+        border: 2px rgba(0, 0, 0, 0.185) solid;
+        transition: all .3s;
+    }
+
+    .check::before {
+        content: '';
+        position: absolute;
+        border: solid #fff;
+        display: block;
+        width: .3em;
+        height: .6em;
+        border-width: 0 .2em .2em 0;
+        z-index: 1;
+        opacity: 0;
+        right: calc(50% - .3em);
+        top: calc(50% - .5em);
+        transform: rotate(0deg);
+        transition: all .3s;
+        transform-origin: center center;
+    }
+
+    .check:checked {
+        animation: a .3s ease-in forwards;
+        background-color: $blue;
+    }
+
+    .check:checked::before {
+        opacity: 1;
+        transform: rotate(405deg);
+    }
+
+    @keyframes a {
+        0% {
+            opacity: 1;
+            transform: scale(1) rotateY(0deg);
+        }
+
+        50% {
+            opacity: 0;
+            transform: scale(.8) rotateY(180deg);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1) rotateY(360deg);
         }
     }
+
 }
