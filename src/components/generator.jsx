@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RgbaColorPicker } from "react-colorful";
 
 export const Generator = ({ bgRef, bgColorRef, img }) => {
@@ -21,6 +21,7 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
         baseLink = `https://texturegenerator.sirv.com/Images/${img}.jpg`
     }
     const [color] = useState({ r: 250, g: 250, b: 255, a: 1 })
+    const codeRef = useRef()
     const [texture, setTexture] = useState({
         opacity: 25,
         link: baseLink,
@@ -60,6 +61,11 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
         const code = document.querySelector('.code-export').textContent
         let newCode = (code.slice(0, code.length - 4))
         navigator.clipboard.writeText(newCode)
+        codeRef.current.classList.add('active')
+        console.log(codeRef.current.classList);
+        setTimeout(() => {
+            codeRef.current.classList.remove('active')
+        }, 2000);
     }
 
     return <section className="generator flex space-evenly align-center">
@@ -73,7 +79,6 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
                 backgroundPosition: `${texture.bgPosX}% ${texture.bgPosY}%`,
                 backgroundSize: `${texture.bgSizeX}% ${texture.bgSizeY}%`,
             }}>
-
             </div>
         </div>
 
@@ -113,7 +118,7 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
                 <RgbaColorPicker color={color} onChange={handleColor} />
             </div>
 
-            <div className="code-export">
+            <div className="code-export" ref={codeRef}>
                 <div className="code-content">
                     <p><span>background-image:</span> url("{baseLink}
                         {texture.opacity > 0 && `?opacity=${texture.opacity}`}

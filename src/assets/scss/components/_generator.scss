@@ -35,10 +35,13 @@
 
     .code-export {
         background-color: $black;
-        padding: $padding+10 $padding;
+        padding: $padding+10 $padding 50px $padding ;
         box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
         position: relative;
         transition: 0.2s;
+        overflow-y: hidden;
+        // overflow-x: auto;
+        // max-width: 730px;
 
         p {
             color: $purple;
@@ -47,7 +50,7 @@
             font-size: $code;
             width: 100%;
             word-wrap: break-word;
-            white-space: nowrap;
+            // white-space: nowrap;
             /* Add this line to prevent text wrapping */
 
             span {
@@ -55,26 +58,42 @@
             }
         }
 
-        &::after {
-            content: 'copied!';
-            background-color: $brown;
-            position: absolute;
-            text-align: center;
-            width: 100%;
-            left: 0;
-            bottom: 0;
-            animation: copiedNotification 0.5s alternate;
+        &.active {
+            &::after {
+                content: 'copied!';
+                background-color: $brown;
+                position: absolute;
+                text-align: center;
+                width: 100%;
+                left: 0;
+                bottom: 0;
+                animation: copiedNotification 2s forwards;
+                font-size: 0%;
+                // transition: 0.3s;
+            }
         }
 
         @keyframes copiedNotification {
-            from {
-                font-size: 0;
+            0% {
+                font-size: 0vw;
             }
 
-            to {
-                // height: 20%;
+            10% {
                 font-size: 16px;
 
+            }
+
+            50% {
+                font-size: 16px;
+            }
+
+            90% {
+                font-size: 16px;
+
+            }
+
+            100% {
+                font-size: 0vw;
             }
         }
 
@@ -91,7 +110,8 @@
             transition: 0.1s;
 
             &:active {
-                transform: scale(1.2) translate(-2px, 2px);
+                // transform: translate(-2px, 2px);
+                background-color: $brown;
             }
         }
     }
