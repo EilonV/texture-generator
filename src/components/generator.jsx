@@ -10,7 +10,7 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
         bg.opacity = `${texture.opacity / 100}`
         bg.backgroundPosition = `${texture.bgPosX}% ${texture.bgPosY}%`
         bg.backgroundSize = `${texture.bgSizeX}% ${texture.bgSizeY}%`
-        bg.filter = `grayscale(${texture.grayscale}) blur(${texture.blur/10}px)`
+        bg.filter = `grayscale(${texture.grayscale}) blur(${texture.blur / 10}px)`
         bgColor.backgroundColor = texture.bgColor
         body.classList.add('active')
     })
@@ -56,12 +56,18 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
         }))
     }
 
+    const copyCode = () => {
+        const code = document.querySelector('.code-export').textContent
+        let newCode = (code.slice(0, code.length - 4))
+        navigator.clipboard.writeText(newCode)
+    }
+
     return <section className="generator flex space-evenly align-center">
         <div className="texture-wrapper" style={{
             backgroundColor: `${texture.bgColor}`
         }}>
             <div className="texture flex align-center  justify-center" style={{
-                filter: `grayscale(${texture.grayscale}) blur(${texture.blur/10}px)`,
+                filter: `grayscale(${texture.grayscale}) blur(${texture.blur / 10}px)`,
                 backgroundImage: `url(${baseLink})`,
                 opacity: `${texture.opacity / 100}`,
                 backgroundPosition: `${texture.bgPosX}% ${texture.bgPosY}%`,
@@ -71,9 +77,9 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
             </div>
         </div>
 
-        <div className="setttings-export flex column">
+        <div className="settings-export flex column">
             <div className="settings flex space-between align-center">
-                <form className="flex column" onInput={handleForm}>
+                <form className="settings-inputs flex column" onInput={handleForm}>
                     <div className="slider flex align-center">
                         <label htmlFor="opacity">Opacity</label>
                         <input type="range" name="opacity" id="opacity" defaultValue={texture.opacity} />
@@ -108,15 +114,18 @@ export const Generator = ({ bgRef, bgColorRef, img }) => {
             </div>
 
             <div className="code-export">
-                <p><span>background-image:</span>url("{baseLink}
-                    {texture.opacity > 0 && `?opacity=${texture.opacity}`}
-                    {(texture.blur > 0 && texture.opacity > 0) && `&blur=${texture.blur}`}
-                    {(texture.grayscale === 1 && texture.opacity > 0) && '&grayscale=true'}
-                    {(texture.grayscale === 1 && !texture.opacity) && '?grayscale=true'}
-                    ");</p>
-                <p><span>background-position:</span> {texture.bgPosX}% {texture.bgPosY}%;</p>
-                <p><span>background-size:</span> {texture.bgSizeX}% {texture.bgSizeY}%;</p>
-                <p><span>background-color:</span> {texture.bgColor};</p>
+                <div className="code-content">
+                    <p><span>background-image:</span> url("{baseLink}
+                        {texture.opacity > 0 && `?opacity=${texture.opacity}`}
+                        {(texture.blur > 0 && texture.opacity > 0) && `&blur=${texture.blur}`}
+                        {(texture.grayscale === 1 && texture.opacity > 0) && '&grayscale=true'}
+                        {(texture.grayscale === 1 && !texture.opacity) && '?grayscale=true'}
+                        ");</p>
+                    <p><span>background-position:</span> {texture.bgPosX}% {texture.bgPosY}%;</p>
+                    <p><span>background-size:</span> {texture.bgSizeX}% {texture.bgSizeY}%;</p>
+                    <p><span>background-color:</span> {texture.bgColor};</p>
+                </div>
+                <div className="copy" onClick={copyCode}>copy</div>
             </div>
 
         </div>

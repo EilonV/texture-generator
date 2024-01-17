@@ -21,7 +21,7 @@
         }
     }
 
-    .setttings-export {
+    .settings-export {
         gap: 20px;
         height: 100%;
         width: 100%;
@@ -30,13 +30,15 @@
     .settings {
         height: 100%;
         gap: 10px;
+        user-select: none;
     }
-
 
     .code-export {
         background-color: $black;
-        padding: $padding;
+        padding: $padding+10 $padding;
         box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+        position: relative;
+        transition: 0.2s;
 
         p {
             color: $purple;
@@ -45,14 +47,57 @@
             font-size: $code;
             width: 100%;
             word-wrap: break-word;
+            white-space: nowrap;
+            /* Add this line to prevent text wrapping */
 
             span {
                 color: lightblue;
             }
         }
+
+        &::after {
+            content: 'copied!';
+            background-color: $brown;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+            animation: copiedNotification 0.5s alternate;
+        }
+
+        @keyframes copiedNotification {
+            from {
+                font-size: 0;
+            }
+
+            to {
+                // height: 20%;
+                font-size: 16px;
+
+            }
+        }
+
+        .copy {
+            background-color: $purple;
+            width: fit-content;
+            padding: 2px 5px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            // border: $brown solid 2px;
+            cursor: pointer;
+            user-select: none;
+            transition: 0.1s;
+
+            &:active {
+                transform: scale(1.2) translate(-2px, 2px);
+            }
+        }
     }
 
-    .slider {
+    .slider,
+    .checkbox {
         gap: 5px;
     }
 
@@ -92,9 +137,7 @@
     }
 
 
-    .checkbox{
-        gap: 10px;
-    }
+
     .check {
         position: relative;
         width: 20px;
