@@ -7,9 +7,11 @@
     border-radius: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     z-index: 1;
+    // overflow: hidden ;
 
     .texture-wrapper {
         width: 100%;
+        height: 100%;
         max-height: 400px;
         max-width: 400px;
         aspect-ratio: 1/1;
@@ -29,6 +31,7 @@
 
     .settings {
         height: 100%;
+        width: 100%;
         gap: 10px;
         user-select: none;
     }
@@ -40,6 +43,7 @@
         position: relative;
         transition: 0.2s;
         overflow-y: hidden;
+
         // overflow-x: auto;
         // max-width: 730px;
 
@@ -49,7 +53,8 @@
             font-weight: 700;
             font-size: $code;
             width: 100%;
-            word-wrap: break-word;
+            // word-wrap: break-word;
+            word-break: break-all;
             // white-space: nowrap;
             /* Add this line to prevent text wrapping */
 
@@ -156,8 +161,6 @@
         }
     }
 
-
-
     .check {
         position: relative;
         width: 20px;
@@ -213,4 +216,17 @@
         }
     }
 
+}
+
+@include for-tablet-layout {
+    .generator {
+        flex-direction: column;
+    }
+    
+}
+
+@include for-mobile-layout {
+    .settings {
+        flex-direction: column;
+    }
 }

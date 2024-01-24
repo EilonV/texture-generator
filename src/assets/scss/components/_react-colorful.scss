@@ -4,4 +4,8 @@
     box-shadow: rgba(100, 100, 111, 0.3) 0px 0px 30px 5px;
     border-radius: 20px;
 
+    @include for-mobile-layout {
+        height: 300px !important;
+        width: 100% !important;
+    }
 }

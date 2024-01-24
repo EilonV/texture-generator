@@ -4,7 +4,8 @@
 
     .texture-bg {
         position: absolute;
-        height: 100vh;
+        min-height: 100vh;
+        height: 100%;
         width: 100%;
         z-index: -1;
         background-image: url("https://texturegenerator.sirv.com/Images/paper.jpg");
@@ -15,7 +16,7 @@
 
     .texture-bg-color {
         position: absolute;
-        height: 100vh;
+        height: 100%;
         width: 100%;
         z-index: -2;
     }

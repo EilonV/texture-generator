@@ -12,6 +12,7 @@
     }
 }
 
+
 @mixin for-wide-layout {
     @media (min-width: $desktop-breakpoint) {
         @content;

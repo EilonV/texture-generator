@@ -25,4 +25,9 @@
     h3 {
         color: $browner;
     }
+
+    @include for-mobile-layout {
+        flex-direction: column;
+    }
+
 }
